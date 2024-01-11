@@ -134,7 +134,6 @@ async function getMessage(login: string, domain: string, id: number) {
 }
 
 const osecmail = {
-  Err,
   generateRandomMailboxes,
   getActiveDomainLists,
   getMessages,
