@@ -18,6 +18,19 @@ type Message = MailboxMessage & {
   htmlBody: string;
 };
 
+enum Err {
+  generateRandomMailboxes1 = "Received JSON is not an array",
+  generateRandomMailboxes2 = "Received array's length is not equal to what was expected",
+  generateRandomMailboxes3 = "Some of the received array's elements are not strings",
+  getActiveDomainLists1 = "Received JSON is not an array",
+  getActiveDomainLists2 = "Some of the received array's elements are not strings",
+  getMessages1 = "Received JSON is not an array",
+  getMessages2 = "Some of the received array's elements are not objects",
+  getMessages3 = "Some of the received array's elements are missing some fields",
+  getMessage1 = "Received JSON is not an object",
+  getMessage2 = "The received object is missing some fields",
+}
+
 const baseUrl = "https://www.1secmail.com/api/v1";
 
 async function generateRandomMailboxes(count: number) {
@@ -27,16 +40,16 @@ async function generateRandomMailboxes(count: number) {
   const mailboxes = await res.json();
 
   if (!Array.isArray(mailboxes)) {
-    throw new Error("Received JSON is not an array");
+    throw new Error(Err.generateRandomMailboxes1);
   }
 
   if (mailboxes.length !== count) {
-    throw new Error(`Received array's length is not equal to count=${count}`);
+    throw new Error(Err.generateRandomMailboxes2);
   }
 
   mailboxes.forEach((e) => {
     if (typeof e !== "string") {
-      throw new Error("Some of the received array's elements are not strings");
+      throw new Error(Err.generateRandomMailboxes3);
     }
   });
 
@@ -50,12 +63,12 @@ async function getActiveDomainLists() {
   const activeDomains = await res.json();
 
   if (!Array.isArray(activeDomains)) {
-    throw new Error("Received JSON is not an array");
+    throw new Error(Err.getActiveDomainLists1);
   }
 
   activeDomains.forEach((e) => {
     if (typeof e !== "string") {
-      throw new Error("Some of the received array's elements are not strings");
+      throw new Error(Err.getActiveDomainLists2);
     }
   });
 
@@ -69,12 +82,12 @@ async function getMessages(login: string, domain: string) {
   const messages = await res.json();
 
   if (!Array.isArray(messages)) {
-    throw new Error("Received JSON is not an array");
+    throw new Error(Err.getMessages1);
   }
 
   messages.forEach((e) => {
     if (typeof e !== "object") {
-      throw new Error("Some of the received array's elements are not objects");
+      throw new Error(Err.getMessages2);
     }
 
     const keys = new Set(Object.keys(e));
@@ -85,9 +98,7 @@ async function getMessages(login: string, domain: string) {
       !keys.has("subject") ||
       !keys.has("date")
     ) {
-      throw new Error(
-        "Some of the received array's elements are missing some fields"
-      );
+      throw new Error(Err.getMessages3);
     }
   });
 
@@ -101,7 +112,7 @@ async function getMessage(login: string, domain: string, id: number) {
   const message = await res.json();
 
   if (typeof message !== "object") {
-    throw new Error("Received JSON is not an object");
+    throw new Error(Err.getMessage1);
   }
 
   const keys = new Set(Object.keys(message));
@@ -116,13 +127,14 @@ async function getMessage(login: string, domain: string, id: number) {
     !keys.has("textBody") ||
     !keys.has("htmlBody")
   ) {
-    throw new Error("The received object is missing some fields");
+    throw new Error(Err.getMessage2);
   }
 
   return message as Message;
 }
 
 const osecmail = {
+  Err,
   generateRandomMailboxes,
   getActiveDomainLists,
   getMessages,

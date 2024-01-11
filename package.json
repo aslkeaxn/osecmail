@@ -1,6 +1,6 @@
 {
   "name": "osecmail",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A wrapper around 1secmail's api",
   "main": "./dist/index.js",
   "scripts": {
