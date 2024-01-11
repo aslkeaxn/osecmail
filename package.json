@@ -1,0 +1,32 @@
+{
+  "name": "osecmail",
+  "version": "1.0.0",
+  "description": "A wrapper around 1secmail's api",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node ./index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aslkeaxn/1secmail-wrapper.git"
+  },
+  "keywords": [
+    "1secmail",
+    "disposable",
+    "email"
+  ],
+  "author": "aslkeaxn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aslkeaxn/1secmail-wrapper/issues"
+  },
+  "homepage": "https://github.com/aslkeaxn/1secmail-wrapper#readme",
+  "files": [
+    "./dist"
+  ],
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
