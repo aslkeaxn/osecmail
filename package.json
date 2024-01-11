@@ -1,6 +1,6 @@
 {
   "name": "osecmail",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A wrapper around 1secmail's api",
   "main": "./dist/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aslkeaxn/1secmail-wrapper.git"
+    "url": "git+https://github.com/aslkeaxn/osecmail.git"
   },
   "keywords": [
     "1secmail",
@@ -19,9 +19,9 @@
   "author": "aslkeaxn",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aslkeaxn/1secmail-wrapper/issues"
+    "url": "https://github.com/aslkeaxn/osecmail/issues"
   },
-  "homepage": "https://github.com/aslkeaxn/1secmail-wrapper#readme",
+  "homepage": "https://github.com/aslkeaxn/osecmail#readme",
   "files": [
     "./dist"
   ],
